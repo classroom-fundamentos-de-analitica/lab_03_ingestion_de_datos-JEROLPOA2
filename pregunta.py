@@ -84,8 +84,6 @@ def ingest_data():
             df_1 = pd.concat([df_1, df_2])
         
         
-        print(df_1)
-        
-ingest_data()
+        return df_1
 
 
