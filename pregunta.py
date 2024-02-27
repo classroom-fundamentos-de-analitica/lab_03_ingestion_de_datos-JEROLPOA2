@@ -53,12 +53,9 @@ def ingest_data():
         headerdict = sorted(headerdict.items())
         header = [x[1] for x in headerdict]
 
-        df = pd.DataFrame()
-        
-        for i in header:
-            df[i] = []
-
         # PROCESAMIENTO DE ENTRADAS
+        df_1 = pd.DataFrame([], columns = [header])
+
         while True:
 
             data = []
@@ -81,14 +78,13 @@ def ingest_data():
             entry_3 = float(data[2].replace(",", "."))
             entry_4 = ' '.join(map(str, data[3:]))
 
-            row = {header[0]: entry_1, 
-                header[1]: entry_2, 
-                header[2]: entry_3, 
-                header[3]: entry_4,}
             
-            df = df.append(row, ignore_index=True)
+            df_2 = pd.DataFrame([[entry_1, entry_2, entry_3, entry_4]], columns = [header])
+            
+            df_1 = pd.concat([df_1, df_2])
         
-        return df
+        
+        print(df_1)
         
 ingest_data()
 
