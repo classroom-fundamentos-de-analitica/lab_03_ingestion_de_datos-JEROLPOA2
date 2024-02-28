@@ -12,7 +12,7 @@ espacio entre palabra y palabra.
 import pandas as pd
 import re
 
-def ingest_data():
+def ingest_data() -> pd.DataFrame:
 
 
     with open('clusters_report.txt', 'r') as file:
@@ -83,8 +83,7 @@ def ingest_data():
             
             df_1 = pd.concat([df_1, df_2])
         
-
         return df_1
 
 
-
+ingest_data()["col"].to
