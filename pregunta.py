@@ -29,7 +29,7 @@ def ingest_data():
             else:
 
                 titles = line.lower()
-                titles = re.sub(r'\S\s\S', lambda x: x.group(0)[0] + '-' + x.group(0)[-1], titles)
+                titles = re.sub(r'\S\s\S', lambda x: x.group(0)[0] + '_' + x.group(0)[-1], titles)
 
                 header.append([(x, y.start()) 
                                for x in titles.split()
@@ -44,15 +44,15 @@ def ingest_data():
             for item, key in i:
 
                 if key in headerdict:
-                    headerdict[key] = headerdict[key] + "-" + item
+                    headerdict[key] = headerdict[key] + "_" + item
                 
                 else:
                     headerdict[key] = item
         
-
+        
         headerdict = sorted(headerdict.items())
         header = [x[1] for x in headerdict]
-
+    
         # PROCESAMIENTO DE ENTRADAS
         df_1 = pd.DataFrame([], columns = [header])
 
@@ -83,7 +83,8 @@ def ingest_data():
             
             df_1 = pd.concat([df_1, df_2])
         
-        
+
         return df_1
+
 
 
