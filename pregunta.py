@@ -80,7 +80,6 @@ def ingest_data() -> pd.DataFrame:
 
             
             df_2 = pd.DataFrame([[entry_1, entry_2, entry_3, entry_4]], columns = [header])
-            df_1 = pd.concat([df_1, df_2])
+            df_1 = pd.concat([df_1, df_2], ignore_index=True)
         
         return df_1
-
