@@ -82,7 +82,7 @@ def ingest_data() -> pd.DataFrame:
             entry_1.append(int(data[0]))
             entry_2.append(int(data[1]))
             entry_3.append(float(data[2].replace(",", ".")))
-            entry_4.append(' '.join(map(str, data[3:])))
+            entry_4.append(' '.join(map(str, data[3:])).replace(".", ""))
 
 
         df1[header[0]] = entry_1
