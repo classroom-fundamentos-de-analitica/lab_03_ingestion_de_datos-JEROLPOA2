@@ -14,7 +14,6 @@ import re
 
 def ingest_data() -> pd.DataFrame:
 
-
     with open('clusters_report.txt', 'r') as file:
         
         # PROCESAMIENTO DE ENCABEZADOS
@@ -39,6 +38,7 @@ def ingest_data() -> pd.DataFrame:
         header = [list(set(x)) for x in header]
         headerdict = {}
 
+
         for i in header:
 
             for item, key in i:
@@ -52,9 +52,15 @@ def ingest_data() -> pd.DataFrame:
         
         headerdict = sorted(headerdict.items())
         header = [x[1] for x in headerdict]
-    
+
+        df1 = pd.DataFrame()
+
         # PROCESAMIENTO DE ENTRADAS
-        df_1 = pd.DataFrame([], columns = [header])
+
+        entry_1 = []
+        entry_2 = []
+        entry_3 = []
+        entry_4 = []
 
         while True:
 
@@ -73,13 +79,15 @@ def ingest_data() -> pd.DataFrame:
             if len(data) == 0:
                 break
 
-            entry_1 = int(data[0])
-            entry_2 = int(data[1])
-            entry_3 = float(data[2].replace(",", "."))
-            entry_4 = ' '.join(map(str, data[3:]))
+            entry_1.append(int(data[0]))
+            entry_2.append(int(data[1]))
+            entry_3.append(float(data[2].replace(",", ".")))
+            entry_4.append(' '.join(map(str, data[3:])))
 
-            
-            df_2 = pd.DataFrame([[entry_1, entry_2, entry_3, entry_4]], columns = [header])
-            df_1 = pd.concat([df_1, df_2], ignore_index=True)
-        
-        return df_1
+
+        df1[header[0]] = entry_1
+        df1[header[1]] = entry_2
+        df1[header[2]] = entry_3
+        df1[header[3]] = entry_4
+
+        return df1
